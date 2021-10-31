@@ -21,6 +21,8 @@ Here is the infrastructure of the table:
 
 ## Task II: Conduct analytics on your dataset 
 
+**All the codes needed in this task are contained in src/main.py**
+
 1. List the x players who achieved highest improvement across all skillsets. The steps are:
     - Overall skill scores are calculated by averaging scores of dribbling, curve, fk accuracy, long passing and ball control.
     - The improvement is overall skill scores minus overall score of a player
