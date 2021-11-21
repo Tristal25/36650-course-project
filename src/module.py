@@ -1,18 +1,23 @@
 import pandas as pd
 from sqlalchemy import create_engine
 import psycopg2
+import os, sys, inspect
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0,parent_dir)
+
+secret = open('../secret.txt', 'r')
+pw = secret.read()[:-1]
 
 # Task I
 
 def init_db():
     # import the FIFA dataset
-    secret = open('secret.txt', 'r')
-    pw = secret.read()[:-1]
     conn = psycopg2.connect(database="postgres", user='postgres', password=pw, host='127.0.0.1', port='5432')
     cursor = conn.cursor()
     cursor.execute("DROP TABLE IF EXISTS fifa;")
     conn.commit()
-    df = pd.read_csv('data/players_20.csv', index_col = False)
+    df = pd.read_csv('../data/players_20.csv', index_col = False)
     df.columns = [c.lower() for c in df.columns]
     engine = create_engine('postgresql://postgres:{0}@localhost:5432/postgres'.format(pw))
     df.to_sql("fifa", engine, method='multi')
@@ -139,8 +144,12 @@ def top_players(x):
     # 3. Choose the players with top x improvement scores.
     # Input: x: the number of players to output
     # Output: a list of full names of players with top x improvements
-    secret = open('secret.txt', 'r')
-    pw = secret.read()[:-1]
+    if not isinstance(x, int):
+        raise TypeError("Input should be an integer value")
+
+    if x <= 0:
+        raise TypeError("Input should be positive")
+
     conn = psycopg2.connect(database="postgres", user='postgres', password=pw, host='127.0.0.1', port='5432')
     cursor = conn.cursor()
     call = '''select long_name from fifa
@@ -158,8 +167,12 @@ def largest_club_2021(y):
     # List the y clubs that have largest number of players with contracts ending in 2021.
     # Input: y: the number of clubs to output
     # Output: list of the required club names
-    secret = open('secret.txt', 'r')
-    pw = secret.read()[:-1]
+    if not isinstance(y, int):
+        raise TypeError("Input should be an integer value")
+
+    if y <= 0:
+        raise TypeError("Input should be positive")
+
     conn = psycopg2.connect(database="postgres", user='postgres', password=pw, host='127.0.0.1', port='5432')
     cursor = conn.cursor()
     call = '''select club from fifa
@@ -178,10 +191,12 @@ def largest_club(z):
     # List the z clubs with largest number of players in the dataset where z >= 5.
     # Input: y: the number of clubs to output
     # Output: list of the required club names
+    if not isinstance(z, int):
+        raise TypeError("Input should be an integer value")
+
     if z < 5:
-        raise TypeError("Error: the number should be greater or equal to 5")
-    secret = open('secret.txt', 'r')
-    pw = secret.read()[:-1]
+        raise TypeError("The number should be greater or equal to 5")
+
     conn = psycopg2.connect(database="postgres", user='postgres', password=pw, host='127.0.0.1', port='5432')
     cursor = conn.cursor()
     call = '''select club from fifa
@@ -198,8 +213,6 @@ def largest_club(z):
 def popular_nation_team():
     # Get the most popular nation_position and team_position in the dataset
     # Output: a dictionary with nation: most popular nation_position, and team: most popular team position
-    secret = open('secret.txt', 'r')
-    pw = secret.read()[:-1]
     conn = psycopg2.connect(database="postgres", user='postgres', password=pw, host='127.0.0.1', port='5432')
     cursor = conn.cursor()
     call1 = '''select nation_position from fifa
@@ -220,8 +233,6 @@ def popular_nation_team():
 
 def popular_nationality():
     # Get the most popular nationality for the players in the dataset
-    secret = open('secret.txt', 'r')
-    pw = secret.read()[:-1]
     conn = psycopg2.connect(database="postgres", user='postgres', password=pw, host='127.0.0.1', port='5432')
     cursor = conn.cursor()
     call = '''select nationality from fifa

@@ -4,7 +4,7 @@
 
 Here is the infrastructure of the table: 
 
-![infrastructure](data/infrastructure.png)
+![infrastructure](docs/infrastructure.png)
 
 **Constraints:**
 1. ```sofifa_id``` is the primary key of this dataset
@@ -21,7 +21,7 @@ Here is the infrastructure of the table:
 
 ## Task II: Conduct analytics on your dataset 
 
-**All the codes needed in this task are contained in src/main.py**
+**All the codes needed in this task are contained in src/module.py**
 
 1. List the x players who achieved highest improvement across all skillsets. The steps are:
     - Overall skill scores are calculated by averaging scores of dribbling, curve, fk accuracy, long passing and ball control.
@@ -45,7 +45,55 @@ Here is the infrastructure of the table:
     
 5. Get the most popular nationality for the players in the dataset\
     **Output**: A string containing the required nationality
+   
+## Task III Test your Code and Document it
 
+In this part, we did unit tests on the functions in Task I and Task II using the ```pytest``` package. 
+The covered scenarios are: 
 
+1. Test ```init_db()```:
+    - Test whether the table has been created
+    - Test the columns (names and types)
+    
+2. Test ```top_players()```, ```largest_club_2021()```, ```largest_club()```:
+    - **Happy case**: 
+        * The return value is not None for a valid input. 
+        * Test answer for smallest value of input
+        * Test answer for medium and common value of input
+        * Test answer for large value of input
+    - **Sad case**: Invalid input, TypeError should be reported. The inputs are: 
+        * None
+        * String
+        * Non-integer
+        * Negative value
+        * Zero
+        * For ```largest_club()``` only: Integer between 0-4
+    
+3. Test ```popular_nation_team()```, ```popular_nationality()```
+    - The return value is not None
+    - Correct result
+    
+The coverage report is documented in test/htmlcov. The overall coverage report is in index.html. 
+Here is a screenshot of index.html:
 
+![coverage](docs/pytest_coverage.png)
+
+We can see that the coverage for module.py is 100%. 
+
+# Task V
+
+**The functions in this part are documented in src/visual.py**
+
+Here are the generated graphs:
+
+1. 10 players with highest improvement across all skillsets: 
+![visual1](docs/visual1.png)
+   
+2. 5 players with highest value
+![visual2](docs/visual2.png)
+   
+3. 10 players with the largest number of player_traits. If there are more than 10 players, e.g. (players 9, 10, and 11 include same number of player traits), include all of them in the visualization.
+![visual3](docs/visual3.png)
+   There are some overlaps in names, but when you run the code, you can zoom in to see each name without overlap. 
+   
 
