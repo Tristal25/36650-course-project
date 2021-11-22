@@ -6,13 +6,17 @@ init_db()
 
 # Task II
 
-top_players(5)
+print(top_players(5))
 
-largest_club_2021(6)
+print(largest_club_2021(6))
 
-largest_club(6)
+print(largest_club(6))
 
-# Task IV
+print(popular_nation_team())
+
+print(popular_nationality())
+
+# Task V
 
 visualize_top10_improvement()
 

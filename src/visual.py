@@ -1,6 +1,6 @@
 import seaborn as sns
+from src.module import *
 import matplotlib.pyplot as plt
-from module import *
 
 def visualize_top10_improvement():
     # Visualize the 10 players who achieved highest improvement across all skillsets. The steps are:
@@ -23,6 +23,7 @@ def visualize_top10_improvement():
         "improvement": [a[1] for a in output]
         })
     sns.catplot(x = "player", y = "improvement", kind="bar", data = dat)
+    plt.show()
 
 def visualize_top5_value():
     # Visualize the 5 players who are highest in value
@@ -42,6 +43,7 @@ def visualize_top5_value():
         "value": [a[1] for a in output]
         })
     sns.catplot(x = "player", y = "value", kind="bar", data = dat)
+    plt.show()
 
 def visualize_top10_traits():
     # Visualize the 5 players who are highest in value
@@ -64,3 +66,4 @@ def visualize_top10_traits():
         })
     dat = dat_full.loc[dat_full.num_traits >= 6].sort_values("num_traits", ascending=False)
     sns.catplot(x = "player", y = "num_traits", kind="bar", data = dat)
+    plt.show()

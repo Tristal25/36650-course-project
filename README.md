@@ -1,5 +1,8 @@
 # Project Repository
 
+**The functionality demo is in src/Example.py**\
+**The link to the video is:https://cmu.box.com/s/wbpwszxcokl4ve4n7zuk6n53day4g21y**
+
 ## Task I: Build and populate necessary tables
 
 Here is the infrastructure of the table: 
@@ -35,7 +38,7 @@ Here is the infrastructure of the table:
     **Output**: list of the required club names
    
 3. List the z clubs with largest number of players in the dataset where z >= 5.\
-    **Input**: y: the number of clubs to output\
+    **Input**: z: the number of clubs to output\
     **Output**: list of the required club names
    
 4. Get the most popular ```nation_position``` and ```team_position``` in the dataset\

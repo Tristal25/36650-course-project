@@ -9,9 +9,11 @@ __pycache__/
 *.pyc
 *.py~
 .pytest_cache/
+test/.pytest_cache/
 
 .idea/
 .vscode/
 
 venv/
+
 secret.txt
